@@ -1,0 +1,62 @@
+' Gambas class file
+Public BRosu As Integer
+Public BVerde As Integer
+Public BAlbastru As Integer
+Public FRosu As Integer
+Public FVerde As Integer
+Public FAlbastru As Integer
+Public Sub Form_Open()
+  ScrollBarRosu.MaxValue = 255
+  ScrollBarVerde.MaxValue = 255
+  ScrollBarAlbastru.MaxValue = 255
+End
+Public Sub cmdQuit_Click()
+  Quit
+End
+Public Sub Form_Load()
+  BRosu = 0
+  BVerde = 0
+  BAlbastru = 0
+  FRosu = 255
+  FVerde = 255
+  FAlbastru = 255
+  lblPatrulater.Background = Color.RGB(BRosu, BVerde, BAlbastru)
+  lblPatrulater.Foreground = Color.RGB(FRosu, FVerde, FAlbastru)
+  lblPatrulater.Patruler.Show()
+End
+Public Sub ScrollBarRosu_Change()
+  ChangeAll()
+End
+Public Sub ScrollBarVerde_Change()
+  ChangeAll()
+End
+Public Sub ScrollBarAlbastru_Change()
+  ChangeAll()
+End
+Public Sub ChangeAll()
+If ToggleButton.Value = True Then
+  lblPatrulater.Background = Color.RGB(ScrollBarRosu.Value, ScrollBarVerde.Value, ScrollBarAlbastru.Value)
+Else
+  lblPatrulater.Foreground = Color.RGB(ScrollBarRosu.Value, ScrollBarVerde.Value, ScrollBarAlbastru.Value)
+End If
+  LabelRosu.Text = "Rosu" & ScrollBarRosu.Value
+  LabelVerde.Text = "Verde" & ScrollBarVerde.Value
+  LabelAlbastru.Text = "Albastru" & ScrollBarAlbastru.Value
+End
+Public Sub ToggleButton_Click()
+If ToggleButton.Value = True Then
+  FRosu = ScrollBarRosu.Value
+  FVerde = ScrollBarVerde.Value
+  FAlbastru = ScrollBarAlbastru.Value
+  ScrollBarRosu.Value = BRosu
+  ScrollBarVerde.Value = BVerde
+  ScrollBarAlbastru.Value = BAlbastru
+Else 
+  BRosu = ScrollBarRosu.Value
+  BVerde = ScrollBarVerde.Value
+  BAlbastru = ScrollBarAlbastru.Value
+  ScrollBarRosu.Value = FRosu
+  ScrollBarVerde.Value = FVerde
+  ScrollBarAlbastru.Value = FAlbastru
+End If
+End
